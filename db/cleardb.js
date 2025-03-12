@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { Client } = require("pg");
+const sql = require("sql-template-strings");
 
 const connectionString = process.env.DATABASE_URL;
 
@@ -7,7 +8,7 @@ if (!connectionString) {
     throw new Error("❌ DATABASE_URL is missing! Check your .env file.");
 }
 
-const SQL = `DROP TABLE userAnimals;
+const SQL = sql`DROP TABLE userAnimals;
 DROP TABLE animals;
 DROP TABLE users;
 `;

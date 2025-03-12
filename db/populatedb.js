@@ -1,4 +1,5 @@
 require("dotenv").config();
+const sql = require("sql-template-strings");
 const { Client } = require("pg");
 
 const connectionString = process.env.DATABASE_URL;
@@ -7,7 +8,7 @@ if (!connectionString) {
     throw new Error("❌ DATABASE_URL is missing! Check your .env file.");
 }
 
-const SQL = `CREATE TABLE IF NOT EXISTS animals (
+const SQL = sql`CREATE TABLE IF NOT EXISTS animals (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     commonName VARCHAR(50),
     avgLifespan NUMERIC(4,1)
