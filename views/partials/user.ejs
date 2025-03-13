@@ -1,0 +1,14 @@
+<% if (users) { %>
+<section>
+    <%users.forEach(user => { %>
+    <article>
+        <h3><%= user.name %></h3>
+        <p><%= user.phone %></p>
+        <p><%= user.street %></p>
+        <p><%= user.city %></p>
+        <p><%= user.state %></p>
+        <p><%= user.zip %></p>
+    </article>
+    <% }); %>
+</section>
+<% } %>

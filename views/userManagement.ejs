@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><% title%></title>
+    </head>
+    <body>
+        <h1><% title%></h1>
+        <a href="/">Home</a>
+        <%- include("partials/errors.ejs") %>
+        <form action="/userManagement/<%= locals.user ? user.id : "new" %>" method="post">
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name" value="<%= locals.user ? user.name : "" %>" required />
+            <label for="phone">Phone: </label>
+            <input
+                type="tel"
+                name="phone"
+                id="phone"
+                value="<%= locals.user ? user.phone : "" %>"
+                required
+            />
+            <label for="street">Street: </label>
+            <input
+                type="text"
+                name="street"
+                id="street"
+                value="<%= locals.user ? user.street : "" %>"
+            />
+            <label for="city">City: </label>
+            <input
+                type="text"
+                name="city"
+                id="city"
+                value="<%= locals.user ? user.city : "" %>"
+            />
+            <label for="state">State Abbreviation: </label>
+            <input
+                type="text"
+                name="state"
+                id="state"
+                maxlength="2"
+                minlength="2"
+                value="<%= locals.user ? user.state : "" %>"
+            />
+            <label for="zip">Zip Code: </label>
+            <input
+                type="text"
+                name="zip"
+                id="zip"
+                value="<%= locals.user ? user.zip : "" %>"
+            />
+            <button type="submit">Update</button>
+        </form>
+        <% if (user) { %>
+        <form action="/deleteUser/<%= user ? user.id : "" %>" method="post">
+            <button type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
+        </form>
+        <% } %>
+    </body>
+</html>

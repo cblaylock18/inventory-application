@@ -10,11 +10,11 @@ if (!connectionString) {
 
 const SQL = sql`CREATE TABLE IF NOT EXISTS animals (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    commonName VARCHAR(50),
+    "type" VARCHAR(50),
     avgLifespan NUMERIC(4,1)
 );
 
-INSERT INTO animals (commonName, avgLifespan) 
+INSERT INTO animals ("type", avgLifespan) 
 VALUES 
     ('dog', 12.0),
     ('cat', 15.0),
@@ -42,17 +42,17 @@ CREATE TABLE IF NOT EXISTS userAnimals (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     userId INTEGER REFERENCES users(id) ON DELETE CASCADE,
     animalId INTEGER REFERENCES animals(id),
-    name VARCHAR(100),
+    petName VARCHAR(100),
     price NUMERIC(10,2)
 );
 
-INSERT INTO userAnimals (userId, animalId, name, price)
+INSERT INTO userAnimals (userId, animalId, petName, price)
 VALUES
-    (1, 1, 'Buddy the Dog', 250.00),
-    (2, 2, 'Whiskers the Cat', 150.00),
-    (3, 3, 'Polly the Parakeet', 50.00),
-    (1, 4, 'Goldie the Goldfish', 20.00),
-    (1, 5, 'Hammy the Hamster', 15.00);
+    (1, 1, 'Buddy', 250.00),
+    (2, 2, 'Whiskers', 150.00),
+    (3, 3, 'Polly', 50.00),
+    (1, 4, 'Goldie', 20.00),
+    (1, 5, 'Hammy', 15.00);
 `;
 
 async function populateDatabase() {

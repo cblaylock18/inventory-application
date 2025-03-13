@@ -6,8 +6,29 @@
         <title><%= title %></title>
     </head>
     <body>
-        <h1><%= title %></h1>
-        <% if (products) { %> <%- include("item", {products: products}) %> <% }
-        %>
+        <header>
+            <h1><%= title %></h1>
+            <h2>Filter by Category</h2>
+            <a href="/categoryManagement/new">New Category</a>
+            <ul>
+                <% if (categories) { %> <% categories.forEach(category => { %>
+                <li>
+                    <a href="/category/<%=category.id%>"><%=category.type%></a
+                    ><a href="/categoryManagement/<%=category.id%>">Edit</a>
+                </li>
+                <% }) %> <% } %>
+            </ul>
+            <h2>Filter by Users</h2>
+            <a href="/userManagement/new">New User</a>
+            <ul>
+                <% if (users) { %> <% users.forEach(user => { %>
+                <li>
+                    <a href="/user/<%=user.id%>"><%=user.name%></a
+                    ><a href="/userManagement/<%=user.id%>">Edit</a>
+                </li>
+                <% }) %> <% } %>
+            </ul>
+        </header>
+        <%- include("partials/item.ejs", {products: products}) %>
     </body>
 </html>
