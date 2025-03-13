@@ -27,12 +27,43 @@ const validateCategory = [
 const validateUser = [
     body("name")
         .trim()
-        .isAlpha()
-        .withMessage(
-            `Animal's common name ${alphaErr} Spell out numbers if needed.`
-        )
+        .isAlpha("en-US", { ignore: " " })
+        .withMessage(`Name ${alphaErr}`)
         .isLength({ min: 1, max: 50 })
         .withMessage(lengthErr(50)),
+
+    body("phone")
+        .trim()
+        .isMobilePhone("en-US")
+        .withMessage("Please enter a valid phone number."),
+
+    body("street")
+        .optional({ checkFalsy: true })
+        .trim()
+        .isLength({ max: 200 })
+        .withMessage(lengthErr(200)),
+
+    body("city")
+        .optional({ checkFalsy: true })
+        .trim()
+        .isAlpha("en-US", { ignore: " " })
+        .withMessage("City must contain only letters.")
+        .isLength({ max: 100 })
+        .withMessage(lengthErr(100)),
+
+    body("state")
+        .optional({ checkFalsy: true })
+        .trim()
+        .isAlpha("en-US")
+        .withMessage("State must contain only letters.")
+        .isLength({ min: 2, max: 2 })
+        .withMessage("State must be exactly 2 characters."),
+
+    body("zip")
+        .optional({ checkFalsy: true })
+        .trim()
+        .matches(/^\d{5}$/)
+        .withMessage("Zip code must be exactly 5 digits."),
 ];
 
 async function inventoryAllGet(req, res) {
