@@ -1,7 +1,7 @@
 const pool = require("./pool");
 const sql = require("sql-template-strings");
 
-async function inventoryAllGet() {
+async function getAllInventory() {
     const SQL = sql`select 
     userAnimals.id,
     userAnimals.petName,
@@ -16,7 +16,7 @@ async function inventoryAllGet() {
     return rows;
 }
 
-async function categoriesAllGet() {
+async function getAllCategories() {
     const SQL = sql`
     select 
     id,
@@ -28,6 +28,17 @@ async function categoriesAllGet() {
     return rows;
 }
 
+async function getCategoryName(id) {
+    const SQL = sql`
+    select
+    "type"
+    from animals
+    where id = $1;`;
+
+    const { rows } = await pool.query(SQL, [id]);
+    return rows[0].type;
+}
+
 async function isCategoryInUse(id) {
     const SQL = sql`select 1
     from userAnimals 
@@ -37,7 +48,7 @@ async function isCategoryInUse(id) {
     return rowCount;
 }
 
-async function inventoryCategoryProducts(id) {
+async function getAllProductsInCategory(id) {
     const SQL = sql`select 
     userAnimals.id,
     userAnimals.petName,
@@ -53,7 +64,7 @@ async function inventoryCategoryProducts(id) {
     return rows;
 }
 
-async function categoryDetailsGet(id) {
+async function getCategoryDetails(id) {
     if (!id) return null;
     const SQL = sql`
     select * from animals
@@ -95,7 +106,7 @@ async function addCategory(type, avglifespan) {
     await pool.query(SQL, [type, avglifespan]);
 }
 
-async function usersAllGet() {
+async function getAllUsers() {
     const SQL = sql`
     select 
     id,
@@ -107,6 +118,17 @@ async function usersAllGet() {
     return rows;
 }
 
+async function getUserName(id) {
+    const SQL = sql`
+    select
+    name
+    from users
+    where id = $1;`;
+
+    const { rows } = await pool.query(SQL, [id]);
+    return rows[0].type;
+}
+
 async function isUserInUse(id) {
     const SQL = sql`select 1
     from userAnimals 
@@ -116,7 +138,7 @@ async function isUserInUse(id) {
     return rowCount;
 }
 
-async function inventoryUserProducts(id) {
+async function getAllProductsInUser(id) {
     const SQL = sql`select 
     userAnimals.id,
     userAnimals.petName,
@@ -132,7 +154,7 @@ async function inventoryUserProducts(id) {
     return rows;
 }
 
-async function userDetailsGet(id) {
+async function getUserDetails(id) {
     if (!id) return null;
     const SQL = sql`
     select * from users
@@ -182,20 +204,72 @@ async function addUser(name, phone, street, city, state, zip) {
     await pool.query(SQL, [name, phone, street, city, state, zip]);
 }
 
+async function getProductDetails(id) {
+    if (!id) return null;
+    const SQL = sql`
+    select * from userAnimals
+    where id = $1
+    ;`;
+    const { rows } = await pool.query(SQL, [id]);
+    return rows[0];
+}
+
+async function updateProduct(id, userid, animalid, petname, price) {
+    const SQL = sql`
+    update userAnimals
+    set userid = $2,
+        animalid = $3,
+        petname = $4,
+        price = $5
+    where id = $1
+    `;
+
+    await pool.query(SQL, [id, userid, animalid, petname, price]);
+}
+
+async function deleteProduct(id) {
+    const SQL = sql`
+    delete from userAnimals
+    where id = $1
+    `;
+
+    await pool.query(SQL, [id]);
+}
+
+async function addProduct(userid, animalid, petname, price) {
+    const SQL = sql`
+    insert into userAnimals (userid, animalid, petname, price)
+    values (
+        $1,
+        $2,
+        $3,
+        $4
+    )
+    `;
+
+    await pool.query(SQL, [userid, animalid, petname, price]);
+}
+
 module.exports = {
-    inventoryAllGet,
-    categoriesAllGet,
-    inventoryCategoryProducts,
-    categoryDetailsGet,
+    getAllInventory,
+    getAllCategories,
+    getAllProductsInCategory,
+    getCategoryDetails,
+    getCategoryName,
     updateCategory,
     deleteCategory,
     addCategory,
     isCategoryInUse,
-    usersAllGet,
+    getAllUsers,
+    getUserName,
     isUserInUse,
-    inventoryUserProducts,
-    userDetailsGet,
+    getAllProductsInUser,
+    getUserDetails,
     updateUser,
     deleteUser,
     addUser,
+    getProductDetails,
+    updateProduct,
+    deleteProduct,
+    addProduct,
 };

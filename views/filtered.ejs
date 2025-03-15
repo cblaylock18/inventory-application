@@ -8,6 +8,8 @@
     <body>
         <h1><%= title %></h1>
         <a href="/">Home</a>
-        <%- include("partials/item.ejs", {products: products}) %>
+        <a href="/productManagement/new">New Foster Animal</a>
+        <% if (locals.products) { %> <%- include("partials/product.ejs",
+        {products: products}) %> <% } %>
     </body>
 </html>

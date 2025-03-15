@@ -8,8 +8,8 @@
     <body>
         <header>
             <h1><%= title %></h1>
-            <h2>Filter by Category</h2>
-            <a href="/categoryManagement/new">New Category</a>
+            <h2>Filter by Animal Type</h2>
+            <a href="/categoryManagement/new">New Animal Type</a>
             <ul>
                 <% if (categories) { %> <% categories.forEach(category => { %>
                 <li>
@@ -18,8 +18,8 @@
                 </li>
                 <% }) %> <% } %>
             </ul>
-            <h2>Filter by Users</h2>
-            <a href="/userManagement/new">New User</a>
+            <h2>Filter by Foster Family</h2>
+            <a href="/userManagement/new">New Foster Family</a>
             <ul>
                 <% if (users) { %> <% users.forEach(user => { %>
                 <li>
@@ -29,6 +29,9 @@
                 <% }) %> <% } %>
             </ul>
         </header>
-        <%- include("partials/item.ejs", {products: products}) %>
+        <main>
+            <a href="/productManagement/new">New Foster Animal</a>
+            <%- include("partials/product.ejs", {products: products}) %>
+        </main>
     </body>
 </html>

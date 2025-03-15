@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><% title%></title>
+    </head>
+    <body>
+        <h1><% title%></h1>
+        <a href="/">Home</a>
+        <a href="/categoryManagement/new">New Animal Type</a>
+        <a href="/userManagement/new">New Foster Family</a>
+        <%- include("partials/errors.ejs") %>
+        <form action="/productManagement/<%= locals.product ? product.id : "new" %>" method="post">
+            <label for="userid">Foster Family: </label>
+            <select name="userid" id="userid" required>
+                <option value="N/A">-- Assign to a User --</option>
+                <% if (locals.users) { %>
+                    <% users.forEach(user => { %>
+                        <option 
+                        <% if (locals.product) { %>
+                            <% if (product.userid == user.id) { %>
+                                selected
+                                <% } %>
+                           <% } %>
+                            value="<%= user.id %>"><%= user.name %></option>
+                   <% }) %>
+               <% } %>
+              </select>
+              <label for="animalid">Animal Type: </label>
+              <select name="animalid" id="animalid" required>
+                  <option value="N/A">-- Assign an Animal Type --</option>
+                  <% if (locals.categories) { %>
+                      <% categories.forEach(category => { %>
+                          <option 
+                          <% if (locals.product) { %>
+                            <% if (product.animalid == category.id) { %>
+                            selected
+                                <% } %>
+                            <% } %>
+                            value="<%= category.id %>"><%= category.type %></option>
+                     <% }) %>
+                 <% } %>
+                </select>
+            <label for="petname">Pet's Name: </label>
+            <input
+                type="text"
+                name="petname"
+                id="petname"
+                value="<%= locals.product ? product.petname : "" %>"
+            />
+            <label for="price">Price: </label>
+            <input
+                type="number"
+                name="price"
+                id="price"
+                step="any"
+                value="<%= locals.product ? product.price : "" %>"
+            />
+            <button type="submit"><%= locals.product ? "Update" : "Create" %></button>
+        </form>
+        <% if (product) { %>
+        <form action="/productManagement/deleteproduct/<%= product ? product.id : "" %>" method="post">
+            <button type="submit" onclick="return confirm('Are you sure you want to remove this foster pet?')">Adopted!</button>
+        </form>
+        <% } %>
+    </body>
+</html>
