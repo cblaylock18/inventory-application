@@ -33,8 +33,14 @@
                             <a href="/category/<%=category.id%>"
                                 ><%=category.type%></a
                             >
-                            <a href="/category/view/<%=category.id%>">View</a>
-                            <a href="/categoryManagement/<%=category.id%>"
+                            <a
+                                class="view-details small"
+                                href="/category/view/<%=category.id%>"
+                                >View</a
+                            >
+                            <a
+                                class="edit small"
+                                href="/categoryManagement/<%=category.id%>"
                                 >Edit</a
                             >
                         </li>
@@ -52,8 +58,16 @@
                         <% if (users) { %> <% users.forEach(user => { %>
                         <li class="filter">
                             <a href="/user/<%=user.id%>"><%=user.name%></a>
-                            <a href="/user/view/<%=user.id%>">View</a>
-                            <a href="/userManagement/<%=user.id%>">Edit</a>
+                            <a
+                                class="view-details small"
+                                href="/user/view/<%=user.id%>"
+                                >View</a
+                            >
+                            <a
+                                class="edit small"
+                                href="/userManagement/<%=user.id%>"
+                                >Edit</a
+                            >
                         </li>
                         <% }) %> <% } %>
                     </ul>

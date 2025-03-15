@@ -9,10 +9,13 @@
     <body>
         <main>
             <h1><%= title %></h1>
-            <a href="/">Home</a>
-                <a class="new" href="/productManagement/new"
+            <div class="product-anchors">
+                <a class="home-link" href="/">Home</a
+                ><a class="new" href="/productManagement/new"
                     >New Foster Animal</a
                 >
+            </div>
+
             <% if (locals.products) { %> <%- include("partials/product.ejs",
             {products: products}) %> <% } %>
         </main>

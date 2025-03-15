@@ -4,18 +4,26 @@
     <article>
         <h3><%= product.petname %></h3>
         <p>
-            Type:
+            <span>Type:</span>
             <a href="/category/view/<%= product.animalid %>"
                 ><%= product.type %></a
             >
         </p>
         <p>
-            Foster Family:
+            <span>Foster Family:</span>
             <a href="/user/view/<%= product.userid %>"><%= product.name %></a>
         </p>
-        <p>Price: <%= product.price %></p>
-        <a href="/product/view/<%= product.id %>">View Details</a>
-        <a href="/productManagement/<%= product.id %>">Edit</a>
+        <p><span>Price: </span><%= product.price %></p>
+        <div class="product-anchors">
+            <div class="view-edit-anchors">
+                <a class="view-details" href="/product/view/<%= product.id %>"
+                    >View Details</a
+                >
+                <a class="edit" href="/productManagement/<%= product.id %>"
+                    >Edit</a
+                >
+            </div>
+        </div>
     </article>
     <% }); %>
 </section>

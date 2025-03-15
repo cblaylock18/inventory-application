@@ -11,7 +11,7 @@ const validateUser = [
         .isAlpha("en-US", { ignore: " " })
         .withMessage(`Name ${alphaErr}`)
         .isLength({ min: 1, max: 50 })
-        .withMessage(lengthErr(50)),
+        .withMessage(`Name ${lengthErr(50)}`),
 
     body("phone")
         .trim()
@@ -51,13 +51,13 @@ async function userManagementGet(req, res) {
     const id = req.params.id;
     if (id === "new") {
         res.render("userManagement", {
-            title: "Manage User",
+            title: "Manage Foster Family",
             user: null,
         });
     } else {
         const user = await db.getUserDetails(req.params.id);
         res.render("userManagement", {
-            title: "Manage User",
+            title: "Manage Foster Family",
             user: user,
         });
     }
@@ -76,7 +76,7 @@ const userManagementPost = [
         const zip = req.body.zip;
         if (!errors.isEmpty()) {
             return res.status(400).render("userManagement", {
-                title: "Manage User",
+                title: "Manage Foster Family",
                 user: { id, name, phone, street, city, state, zip },
                 errors: errors.array(),
             });
@@ -98,9 +98,9 @@ async function userDeletePost(req, res) {
     if (rows > 0) {
         const user = await db.getUserDetails(id);
         res.render("userManagement", {
-            title: "Manage User",
+            title: "Manage Foster Family",
             user: user,
-            errors: [{ msg: "Cannot delete a user that's in use." }],
+            errors: [{ msg: "Cannot delete an active foster family." }],
         });
         return;
     }

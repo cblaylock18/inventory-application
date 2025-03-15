@@ -116,10 +116,33 @@ nav > ul {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+.filter > *:first-child {
+    font-size: 1.5rem;
+}
+
+.filter > *:not(:first-child) {
+    font-style: italic;
+}
+
+.home-link {
+    padding: 0.5rem 3rem;
+    background-color: #000000;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-top: 0rem;
+}
+
 .new {
     font-style: italic;
     display: inline-block;
-    padding: 0.5rem 0rem;
+    padding: 0.5rem 1rem;
     background-color: #3498db;
     color: #fff;
     font-weight: bold;
@@ -133,13 +156,13 @@ nav > ul {
     margin-top: 0rem;
 }
 
+.filter-container > ul .new {
+    flex: 0 1 auto;
+}
+
 .new:hover {
     background-color: #2980b9;
     text-decoration: none;
-}
-
-.newAnimal {
-    padding: 0.5rem 4rem;
 }
 
 section {
@@ -161,12 +184,62 @@ article {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+article > p {
+    font-size: 1.3rem;
+}
+
 article > p > span {
     font-weight: bold;
 }
 
-article > p {
+.product-anchors {
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.view-edit-anchors {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.view-details {
+    padding: 0.5rem 1rem;
+    background-color: #ade97c;
+    color: black;
+    font-weight: bold;
     font-size: 1.3rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-top: 0rem;
+}
+
+.edit {
+    padding: 0.5rem 1rem;
+    background-color: #f18d8d;
+    color: black;
+    font-weight: bold;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-top: 0rem;
+}
+
+.small {
+    font-size: 1rem;
+    padding: 0.1rem 0.1rem;
+    margin: 0 0.5rem 0.2rem;
 }
 
 form {

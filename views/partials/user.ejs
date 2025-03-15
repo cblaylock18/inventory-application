@@ -1,4 +1,4 @@
-<% if (users) { %>
+<% if (locals.users) { %>
 <section>
     <%users.forEach(user => { %>
     <article>
@@ -8,7 +8,10 @@
         <p><span>City: </span><%= user.city %></p>
         <p><span>State: </span><%= user.state %></p>
         <p><span>Zip: </span><%= user.zip %></p>
-        <a href="/userManagement/<%=user.id%>">Edit</a>
+        <div class="view-edit-anchors">
+            <a class="view-details" href="/user/view/<%=user.id%>">View</a>
+            <a class="edit" href="/userManagement/<%=user.id%>">Edit</a>
+        </div>
     </article>
     <% }); %>
 </section>

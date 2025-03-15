@@ -26,7 +26,8 @@ async function getOneProductAllDetails(id) {
     userAnimals.petName,
     userAnimals.price,
     users.name,
-    animals.type, 
+    animals.type,
+    animals.avglifespan,
     users.phone,
     users.street,
     users.city,
@@ -98,6 +99,8 @@ async function isCategoryInUse(id) {
 async function getAllProductsInCategory(id) {
     const SQL = sql`select 
     userAnimals.id,
+    userAnimals.animalId,
+    userAnimals.userId,
     userAnimals.petName,
     userAnimals.price,
     users.name,
@@ -210,6 +213,8 @@ async function isUserInUse(id) {
 async function getAllProductsInUser(id) {
     const SQL = sql`select 
     userAnimals.id,
+    userAnimals.animalId,
+    userAnimals.userId,
     userAnimals.petName,
     userAnimals.price,
     users.name,

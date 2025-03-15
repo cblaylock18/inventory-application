@@ -1,10 +1,15 @@
-<% if (categories) { %>
+<% if (locals.categories) { %>
 <section>
     <%categories.forEach(category => { %>
     <article>
         <h3><span>Animal Type: </span><%= category.type %></h3>
         <p><span>Average Lifespan: </span><%= category.avglifespan %></p>
-        <a href="/categoryManagement/<%=category.id%>">Edit</a>
+        <div class="view-edit-anchors">
+            <a class="view-details" href="/category/view/<%=category.id%>"
+                >View</a
+            >
+            <a class="edit" href="/categoryManagement/<%=category.id%>">Edit</a>
+        </div>
     </article>
     <% }); %>
 </section>

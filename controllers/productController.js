@@ -23,9 +23,9 @@ const validateProduct = [
 
     body("userid")
         .notEmpty()
-        .withMessage("User is required.")
+        .withMessage("Foster family is required.")
         .isInt()
-        .withMessage("User must be selected."),
+        .withMessage("Foster family must be selected."),
 
     body("animalid")
         .notEmpty()
@@ -42,15 +42,15 @@ async function productManagementGet(req, res) {
     let errors = [];
 
     if (categories.length === 0) {
-        errors.push({ msg: "Create a category before adding a product." });
+        errors.push({ msg: "Create a category before adding an animal." });
     }
     if (users.length === 0) {
-        errors.push({ msg: "Create a user before adding a product." });
+        errors.push({ msg: "Create a user before adding an animal." });
     }
 
     if (id === "new") {
         res.render("productManagement", {
-            title: "Manage Product",
+            title: "Manage Foster Animal",
             users: users,
             categories: categories,
             product: null,
@@ -59,7 +59,7 @@ async function productManagementGet(req, res) {
     } else {
         const product = await db.getProductDetails(req.params.id);
         res.render("productManagement", {
-            title: "Manage Product",
+            title: "Manage Foster Animal",
             users: users,
             categories: categories,
             product: product,
@@ -83,15 +83,15 @@ const productManagementPost = [
 
         const errors = errorsFromValidation.array();
         if (categories.length === 0) {
-            errors.push({ msg: "Create a category before adding a product." });
+            errors.push({ msg: "Create a category before adding an animal." });
         }
         if (users.length === 0) {
-            errors.push({ msg: "Create a user before adding a product." });
+            errors.push({ msg: "Create a user before adding an animal." });
         }
 
         if (errors.length > 0) {
             return res.status(400).render("productManagement", {
-                title: "Manage Product",
+                title: "Manage Foster Animal",
                 product: { id, userid, animalid, petname, price },
                 users: users,
                 categories: categories,

@@ -5,7 +5,7 @@ async function inventoryAllGet(req, res) {
     const products = await db.getAllInventory();
     const users = await db.getAllUsers();
     res.render("index", {
-        title: "All Foster Animals",
+        title: "Foster Care Database Management for End-Users",
         categories: categories,
         products: products,
         users: users,

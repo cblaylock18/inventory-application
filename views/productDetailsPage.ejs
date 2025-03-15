@@ -8,20 +8,22 @@
     </head>
     <body>
         <h1><%= title %></h1>
-        <a href="/">Home</a>
+        <div class="product-anchors">
+            <a class="home-link" href="/">Home</a>
+        </div>
         <% if (locals.product) { %>
         <section>
-            <article>
+            <article class="product-details">
                 <h3><%= product.petname %></h3>
                 <p>
-                    Type:
+                    <span>Type:</span>
                     <a href="/category/view/<%= product.animalid %>"
                         ><%= product.type %></a
                     >
                 </p>
                 <p><span>Average Lifespan: </span><%= product.avglifespan %></p>
                 <p>
-                    Foster Family:
+                    <span>Foster Family:</span>
                     <a href="/user/view/<%= product.userid %>"
                         ><%= product.name %></a
                     >
@@ -31,8 +33,12 @@
                 <p><span>City: </span><%= product.city %></p>
                 <p><span>State: </span><%= product.state %></p>
                 <p><span>Zip: </span><%= product.zip %></p>
-                <p>Price: <%= product.price %></p>
-                <a href="/productManagement/<%= product.id %>">Edit</a>
+                <p><span>Price: </span><%= product.price %></p>
+                <div class="view-edit-anchors">
+                    <a class="edit" href="/productManagement/<%= product.id %>"
+                        >Edit</a
+                    >
+                </div>
             </article>
         </section>
         <% } %>

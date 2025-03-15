@@ -3,14 +3,16 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title><% title%></title>
+        <title><%= title%></title>
         <link rel="stylesheet" href="/styles.css" />
     </head>
     <body>
-        <h1><% title%></h1>
-        <a href="/">Home</a>
-        <a href="/categoryManagement/new">New Animal Type</a>
-        <a href="/userManagement/new">New Foster Family</a>
+        <h1><%= title%></h1>
+<div class="product-anchors">
+            <a class="home-link" href="/">Home</a>
+            <a class="new" href="/categoryManagement/new">New Animal Type</a>
+            <a class="new" href="/userManagement/new">New Foster Family</a>
+</div>
         <%- include("partials/errors.ejs") %>
         <form action="/productManagement/<%= locals.product ? product.id : "new" %>" method="post">
             <label for="userid">Foster Family: </label>
