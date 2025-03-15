@@ -4,12 +4,17 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title><%= title %></title>
+        <link rel="stylesheet" href="/styles.css" />
     </head>
     <body>
-        <h1><%= title %></h1>
-        <a href="/">Home</a>
-        <a href="/productManagement/new">New Foster Animal</a>
-        <% if (locals.products) { %> <%- include("partials/product.ejs",
-        {products: products}) %> <% } %>
+        <main>
+            <h1><%= title %></h1>
+            <a href="/">Home</a>
+                <a class="new" href="/productManagement/new"
+                    >New Foster Animal</a
+                >
+            <% if (locals.products) { %> <%- include("partials/product.ejs",
+            {products: products}) %> <% } %>
+        </main>
     </body>
 </html>

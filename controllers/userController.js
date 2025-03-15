@@ -1,5 +1,6 @@
 const db = require("../db/queries");
 const { body, validationResult } = require("express-validator");
+const asyncHandler = require("../helperFns/asyncHandler");
 
 const alphaErr = "must only contain letters.";
 const lengthErr = (len) => `must be between 1 and ${len} characters.`;
@@ -64,7 +65,7 @@ async function userManagementGet(req, res) {
 
 const userManagementPost = [
     validateUser,
-    async (req, res) => {
+    asyncHandler(async (req, res) => {
         const errors = validationResult(req);
         const id = req.params.id ? req.params.id : "";
         const name = req.body.name;
@@ -87,7 +88,7 @@ const userManagementPost = [
             await db.updateUser(id, name, phone, street, city, state, zip);
         }
         res.redirect("/");
-    },
+    }),
 ];
 
 async function userDeletePost(req, res) {

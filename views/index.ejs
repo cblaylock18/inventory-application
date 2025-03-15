@@ -4,34 +4,69 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title><%= title %></title>
+        <link rel="stylesheet" href="/styles.css" />
     </head>
     <body>
         <header>
             <h1><%= title %></h1>
-            <h2>Filter by Animal Type</h2>
-            <a href="/categoryManagement/new">New Animal Type</a>
-            <ul>
-                <% if (categories) { %> <% categories.forEach(category => { %>
-                <li>
-                    <a href="/category/<%=category.id%>"><%=category.type%></a
-                    ><a href="/categoryManagement/<%=category.id%>">Edit</a>
-                </li>
-                <% }) %> <% } %>
-            </ul>
-            <h2>Filter by Foster Family</h2>
-            <a href="/userManagement/new">New Foster Family</a>
-            <ul>
-                <% if (users) { %> <% users.forEach(user => { %>
-                <li>
-                    <a href="/user/<%=user.id%>"><%=user.name%></a
-                    ><a href="/userManagement/<%=user.id%>">Edit</a>
-                </li>
-                <% }) %> <% } %>
-            </ul>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/allCategories">View All Animal Types</a>
+                    </li>
+                    <li>
+                        <a href="/allUsers">View All Foster Families</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="filters">
+                <div class="filter-container">
+                    <h2>Filter by Animal Type</h2>
+                    <ul>
+                        <li>
+                            <a class="new" href="/categoryManagement/new"
+                                >New Animal Type</a
+                            >
+                        </li>
+                        <% if (categories) { categories.forEach(category => { %>
+                        <li class="filter">
+                            <a href="/category/<%=category.id%>"
+                                ><%=category.type%></a
+                            >
+                            <a href="/category/view/<%=category.id%>">View</a>
+                            <a href="/categoryManagement/<%=category.id%>"
+                                >Edit</a
+                            >
+                        </li>
+                        <% }) %> <% } %>
+                    </ul>
+                </div>
+                <div class="filter-container">
+                    <h2>Filter by Foster Family</h2>
+                    <ul>
+                        <li>
+                            <a class="new" href="/userManagement/new"
+                                >New Foster Family</a
+                            >
+                        </li>
+                        <% if (users) { %> <% users.forEach(user => { %>
+                        <li class="filter">
+                            <a href="/user/<%=user.id%>"><%=user.name%></a>
+                            <a href="/user/view/<%=user.id%>">View</a>
+                            <a href="/userManagement/<%=user.id%>">Edit</a>
+                        </li>
+                        <% }) %> <% } %>
+                    </ul>
+                </div>
+            </div>
         </header>
         <main>
-            <a href="/productManagement/new">New Foster Animal</a>
-            <%- include("partials/product.ejs", {products: products}) %>
+            <h3>Current Foster Animals</h3>
+            <a class="new newAnimal" href="/productManagement/new"
+                >New Foster Animal</a
+            >
+            <% if (locals.products) { %> <%- include("partials/product.ejs",
+            {products: products}) %> <% } %>
         </main>
     </body>
 </html>

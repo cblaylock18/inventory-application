@@ -29,6 +29,25 @@ async function inventoryCategoryGet(req, res) {
     });
 }
 
+async function inventoryAllCategoriesGet(req, res) {
+    const categories = await db.getAllCategoriesAllDetails();
+
+    res.render("categories", {
+        title: `All Animal Types`,
+        categories: categories,
+    });
+}
+
+async function inventoryOneCategoryGet(req, res) {
+    const id = req.params.id;
+    const category = await db.getOneCategoryAllDetails(id);
+
+    res.render("categories", {
+        title: `${category[0].type} Details`,
+        categories: category,
+    });
+}
+
 async function inventoryUserGet(req, res) {
     const id = req.params.id;
     const user = await db.getUserName(id);
@@ -46,8 +65,42 @@ async function inventoryUserGet(req, res) {
     });
 }
 
+async function inventoryAllUsersGet(req, res) {
+    const users = await db.getAllUsersAllDetails();
+
+    res.render("users", {
+        title: `All Foster Families`,
+        users: users,
+    });
+}
+
+async function inventoryOneUserGet(req, res) {
+    const id = req.params.id;
+    const user = await db.getOneUserAllDetails(id);
+
+    res.render("users", {
+        title: `${user[0].name} Details`,
+        users: user,
+    });
+}
+
+async function inventoryOneProductGet(req, res) {
+    const id = req.params.id;
+    const product = await db.getOneProductAllDetails(id);
+
+    res.render("productDetailsPage", {
+        title: `${product[0].petname} Details`,
+        product: product[0],
+    });
+}
+
 module.exports = {
     inventoryAllGet,
     inventoryCategoryGet,
+    inventoryAllCategoriesGet,
+    inventoryOneCategoryGet,
     inventoryUserGet,
+    inventoryAllUsersGet,
+    inventoryOneUserGet,
+    inventoryOneProductGet,
 };

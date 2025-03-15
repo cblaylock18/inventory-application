@@ -1,5 +1,6 @@
 const db = require("../db/queries");
-const { body, param, validationResult } = require("express-validator");
+const { body, validationResult } = require("express-validator");
+const asyncHandler = require("../helperFns/asyncHandler");
 
 const lengthErr = (len) => `must be between 1 and ${len} characters.`;
 
@@ -69,7 +70,7 @@ async function productManagementGet(req, res) {
 
 const productManagementPost = [
     validateProduct,
-    async (req, res) => {
+    asyncHandler(async (req, res) => {
         const errorsFromValidation = validationResult(req);
         const id = req.params.id ? req.params.id : "";
         const userid = req.body.userid;
@@ -104,7 +105,7 @@ const productManagementPost = [
             await db.updateProduct(id, userid, animalid, petname, price);
         }
         res.redirect("/");
-    },
+    }),
 ];
 
 async function productDeletePost(req, res) {

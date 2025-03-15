@@ -19,10 +19,12 @@
         "start": "node --watch app.js"
     },
     "dependencies": {
+        "connect-livereload": "^0.6.1",
         "dotenv": "^16.4.7",
         "ejs": "^3.1.10",
         "express": "^4.21.2",
         "express-validator": "^7.2.1",
+        "livereload": "^0.9.3",
         "pg": "^8.14.0",
         "sql-template-strings": "^2.2.2"
     }

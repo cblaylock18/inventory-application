@@ -2,12 +2,13 @@
 <section>
     <%users.forEach(user => { %>
     <article>
-        <h3><%= user.name %></h3>
-        <p><%= user.phone %></p>
-        <p><%= user.street %></p>
-        <p><%= user.city %></p>
-        <p><%= user.state %></p>
-        <p><%= user.zip %></p>
+        <h3><span>Name: </span><%= user.name %></h3>
+        <p><span>Phone: </span><%= user.phone %></p>
+        <p><span>Street: </span><%= user.street %></p>
+        <p><span>City: </span><%= user.city %></p>
+        <p><span>State: </span><%= user.state %></p>
+        <p><span>Zip: </span><%= user.zip %></p>
+        <a href="/userManagement/<%=user.id%>">Edit</a>
     </article>
     <% }); %>
 </section>

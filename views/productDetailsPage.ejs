@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= title %></title>
+        <link rel="stylesheet" href="/styles.css" />
+    </head>
+    <body>
+        <h1><%= title %></h1>
+        <a href="/">Home</a>
+        <% if (locals.product) { %>
+        <section>
+            <article>
+                <h3><%= product.petname %></h3>
+                <p>
+                    Type:
+                    <a href="/category/view/<%= product.animalid %>"
+                        ><%= product.type %></a
+                    >
+                </p>
+                <p><span>Average Lifespan: </span><%= product.avglifespan %></p>
+                <p>
+                    Foster Family:
+                    <a href="/user/view/<%= product.userid %>"
+                        ><%= product.name %></a
+                    >
+                </p>
+                <p><span>Phone: </span><%= product.phone %></p>
+                <p><span>Street: </span><%= product.street %></p>
+                <p><span>City: </span><%= product.city %></p>
+                <p><span>State: </span><%= product.state %></p>
+                <p><span>Zip: </span><%= product.zip %></p>
+                <p>Price: <%= product.price %></p>
+                <a href="/productManagement/<%= product.id %>">Edit</a>
+            </article>
+        </section>
+        <% } %>
+    </body>
+</html>

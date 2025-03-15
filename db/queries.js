@@ -4,6 +4,8 @@ const sql = require("sql-template-strings");
 async function getAllInventory() {
     const SQL = sql`select 
     userAnimals.id,
+    userAnimals.userId,
+    userAnimals.animalId,
     userAnimals.petName,
     userAnimals.price,
     users.name,
@@ -16,6 +18,29 @@ async function getAllInventory() {
     return rows;
 }
 
+async function getOneProductAllDetails(id) {
+    const SQL = sql`select 
+    userAnimals.id,
+    userAnimals.userId,
+    userAnimals.animalId,
+    userAnimals.petName,
+    userAnimals.price,
+    users.name,
+    animals.type, 
+    users.phone,
+    users.street,
+    users.city,
+    users.state,
+    users.zip
+    from userAnimals 
+    inner join users on userAnimals.userId = users.id
+    inner join animals on userAnimals.animalId = animals.id
+    where userAnimals.id = $1;`;
+
+    const { rows } = await pool.query(SQL, [id]);
+    return rows;
+}
+
 async function getAllCategories() {
     const SQL = sql`
     select 
@@ -25,6 +50,28 @@ async function getAllCategories() {
     order by id;`;
 
     const { rows } = await pool.query(SQL);
+    return rows;
+}
+
+async function getAllCategoriesAllDetails() {
+    const SQL = sql`
+    select 
+    *
+    from animals
+    order by id;`;
+
+    const { rows } = await pool.query(SQL);
+    return rows;
+}
+
+async function getOneCategoryAllDetails(id) {
+    const SQL = sql`
+    select 
+    *
+    from animals
+    where id = $1;`;
+
+    const { rows } = await pool.query(SQL, [id]);
     return rows;
 }
 
@@ -118,6 +165,28 @@ async function getAllUsers() {
     return rows;
 }
 
+async function getAllUsersAllDetails() {
+    const SQL = sql`
+    select 
+    *
+    from users
+    order by id;`;
+
+    const { rows } = await pool.query(SQL);
+    return rows;
+}
+
+async function getOneUserAllDetails(id) {
+    const SQL = sql`
+    select 
+    *
+    from users
+    where id = $1;`;
+
+    const { rows } = await pool.query(SQL, [id]);
+    return rows;
+}
+
 async function getUserName(id) {
     const SQL = sql`
     select
@@ -126,7 +195,7 @@ async function getUserName(id) {
     where id = $1;`;
 
     const { rows } = await pool.query(SQL, [id]);
-    return rows[0].type;
+    return rows[0].name;
 }
 
 async function isUserInUse(id) {
@@ -252,7 +321,10 @@ async function addProduct(userid, animalid, petname, price) {
 
 module.exports = {
     getAllInventory,
+    getOneProductAllDetails,
     getAllCategories,
+    getAllCategoriesAllDetails,
+    getOneCategoryAllDetails,
     getAllProductsInCategory,
     getCategoryDetails,
     getCategoryName,
@@ -261,6 +333,8 @@ module.exports = {
     addCategory,
     isCategoryInUse,
     getAllUsers,
+    getAllUsersAllDetails,
+    getOneUserAllDetails,
     getUserName,
     isUserInUse,
     getAllProductsInUser,

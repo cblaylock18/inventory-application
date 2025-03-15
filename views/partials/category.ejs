@@ -1,0 +1,11 @@
+<% if (categories) { %>
+<section>
+    <%categories.forEach(category => { %>
+    <article>
+        <h3><span>Animal Type: </span><%= category.type %></h3>
+        <p><span>Average Lifespan: </span><%= category.avglifespan %></p>
+        <a href="/categoryManagement/<%=category.id%>">Edit</a>
+    </article>
+    <% }); %>
+</section>
+<% } %>

@@ -1,5 +1,6 @@
 const db = require("../db/queries");
 const { body, validationResult } = require("express-validator");
+const asyncHandler = require("../helperFns/asyncHandler");
 
 const alphaErr = "must only contain letters.";
 const numErr = "must only contain numbers.";
@@ -42,7 +43,7 @@ async function categoryManagementGet(req, res) {
 
 const categoryManagementPost = [
     validateCategory,
-    async (req, res) => {
+    asyncHandler(async (req, res) => {
         const errors = validationResult(req);
         const id = req.params.id ? req.params.id : "";
         const type = req.body.type;
@@ -61,7 +62,7 @@ const categoryManagementPost = [
             await db.updateCategory(id, type, avglifespan);
         }
         res.redirect("/");
-    },
+    }),
 ];
 
 async function categoryDeletePost(req, res) {

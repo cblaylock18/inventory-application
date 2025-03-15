@@ -3,9 +3,18 @@
     <%products.forEach(product => { %>
     <article>
         <h3><%= product.petname %></h3>
-        <p><span>Type: </span><%= product.type %></p>
-        <p><span>Foster Family: </span><%= product.name %></p>
-        <p><span>Price: </span><%= product.price %></p>
+        <p>
+            Type:
+            <a href="/category/view/<%= product.animalid %>"
+                ><%= product.type %></a
+            >
+        </p>
+        <p>
+            Foster Family:
+            <a href="/user/view/<%= product.userid %>"><%= product.name %></a>
+        </p>
+        <p>Price: <%= product.price %></p>
+        <a href="/product/view/<%= product.id %>">View Details</a>
         <a href="/productManagement/<%= product.id %>">Edit</a>
     </article>
     <% }); %>
