@@ -4,6 +4,10 @@
         sans-serif;
 }
 
+body {
+    max-width: 1500px;
+}
+
 h1 {
     font-size: 3rem;
     font-weight: bolder;
